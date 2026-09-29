@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Loyalty Management</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <h1>Retail Loyalty Management</h1>
+        <p>Customer points, tiers, purchases and history</p>
+    </div>
+    <span id="apiStatus" class="status-pill">Checking API...</span>
+</header>
+
+<main class="container">
+    <section class="cards">
+        <div class="card"><span>Customers</span><strong id="customerCount">-</strong></div>
+        <div class="card"><span>Tiers</span><strong id="tierCount">-</strong></div>
+        <div class="card"><span>Server</span><strong>8080</strong></div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head">
+            <h2>Customers</h2>
+            <button onclick="loadCustomers()">Refresh</button>
+        </div>
+
+        <form id="customerForm" class="grid-form">
+            <input id="name" placeholder="Customer name" required>
+            <input id="email" type="email" placeholder="Email" required>
+            <input id="phone" placeholder="Phone">
+            <button type="submit">Create Customer</button>
+        </form>
+
+        <div id="message" class="message hidden"></div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Tier</th>
+                    <th>Available Points</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="customerTable"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head">
+            <h2>Quick Purchase</h2>
+        </div>
+
+        <form id="purchaseForm" class="grid-form">
+            <input id="purchaseCustomerId" type="number" min="1" placeholder="Customer ID" required>
+            <input id="purchaseAmount" type="number" min="0.01" step="0.01" placeholder="Purchase amount" required>
+            <input id="pointsToRedeem" type="number" min="0" step="1" value="0" placeholder="Points to redeem">
+            <button type="submit">Process Purchase</button>
+        </form>
+
+        <div id="purchaseResult" class="result-card hidden"></div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head">
+            <h2>Loyalty Summary</h2>
+        </div>
+
+        <form id="summaryForm" class="inline-form">
+            <input id="summaryCustomerId" type="number" min="1" placeholder="Customer ID" required>
+            <button type="submit">View Summary</button>
+        </form>
+
+        <div id="summaryResult" class="result-card hidden"></div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head">
+            <h2>Loyalty Tiers</h2>
+            <button onclick="loadTiers()">Refresh</button>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Minimum Points</th>
+                    <th>Discount %</th>
+                </tr>
+                </thead>
+                <tbody id="tierTable"></tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>
